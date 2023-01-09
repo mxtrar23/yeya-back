@@ -1,31 +1,31 @@
 const Joi = require('joi')
 
-const reg_id = Joi.string().uuid();
+const id = Joi.string().uuid();
 
-const reg_descripcion = Joi.string().min(3);
+const descripcion = Joi.string().min(3);
 
-const reg_value = Joi.number().integer().min(100);
+const value = Joi.number().integer().min(100);
 
-const reg_date = Joi.date();
+const date = Joi.date();
 
 
 const CreateRegistersSchema = Joi.object({
-    reg_descripcion : reg_descripcion.required(),
-    reg_value : reg_value.required(),
+    descripcion : descripcion.required(),
+    value : value.required(),
 })
 
 
 
 const EditeRegistersSchema = Joi.object({
-  reg_id:reg_id,
-  reg_descripcion : reg_descripcion,
-  reg_value : reg_value,
-  reg_date : reg_date,
+  id:id,
+  descripcion : descripcion,
+  value : value,
+  date : date,
 })
 
 
 const FineOneRegistersSchema = Joi.object({
-  reg_id:reg_id.required()
+  id:id.required()
 })
 
 

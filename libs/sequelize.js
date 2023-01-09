@@ -13,6 +13,6 @@ const sequelize = new Sequelize(dbName,dbUser,dbPassword,{
 
 setupModels(sequelize)
 
-sequelize.sync()
+// sequelize.sync()
 
 module.exports = sequelize

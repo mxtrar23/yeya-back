@@ -1,6 +1,7 @@
 const express = require("express");
 const routerApi = require("./routes");
 const {errorsHandler,logErrors,boomErrorsHandler,queryErrorHandler} = require('./middlewares/error.handler')
+const AuthHandler = require('./middlewares/auth.handler')
 
 const app = express();
 require('dotenv').config()
@@ -8,7 +9,13 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json())
 
+require('./utils/auth')
+
 app.get("/", (req, res) =>{
+  res.send("Hola mi server en Express");
+});
+
+app.get("/info",AuthHandler, (req, res) =>{
   res.send("Hola mi server en Express");
   console.log(process.env)
 });

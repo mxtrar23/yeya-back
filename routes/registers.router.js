@@ -1,6 +1,7 @@
 const express = require("express");
 const RegistersService = require('../services/registers.service')
 
+const passport = require('passport')
 const {validatorHandler} = require('../middlewares/validator.handler')
 
 const {CreateRegistersSchema,EditeRegistersSchema,FineOneRegistersSchema} = require('../schemas/registers.schema')
@@ -15,9 +16,10 @@ router.get("/", async (req, res) =>{
 });
 
 router.post("/",
+  passport.authenticate('jwt',{session:false}),
   validatorHandler(CreateRegistersSchema,'body'),
   async (req, res,next) =>{
-    let body = req.body;
+    let body = {...req.body,userId:req.user.sub};
     try {
       const register = await service.create(body)
       res.json(register);

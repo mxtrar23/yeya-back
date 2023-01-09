@@ -1,11 +1,8 @@
 const boom = require('@hapi/boom')
-
-const { v4 : uuidv4 } = require('uuid')
-
 // const poolConex = require('../libs/mysql')
 // const sequelize = require('../libs/sequalize')
 
-const {models} = require('../libs/sequalize')
+const {models} = require('../libs/sequelize')
 
 class RegistersService {
 
@@ -33,8 +30,7 @@ class RegistersService {
 
   async create (data) {
     const register = {
-      reg_id:uuidv4(),
-      reg_date:new Date(),
+      date:new Date(),
       ...data
     }
     //this.registers.push(register);

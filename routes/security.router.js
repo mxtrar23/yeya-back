@@ -1,14 +1,28 @@
 const express = require("express");
-
+const passport = require('passport')
+const jwt = require('jsonwebtoken')
+const { config } = require('./../config/config');
 const router = express.Router();
 
-router.get("/params/:id", (req, res) =>{
-  res.json(req.params)
+router.post("/login",
+passport.authenticate('local',{session:false}),
+ (req, res,next) =>{
+   try {
+    const user = req.user;
+    const payload = {
+      sub: user.id,
+      role: user.role
+    }
+    const token = jwt.sign(payload, config.jwtSecret);
+    res.json({
+      user,
+      token
+    });
+   } catch (error) {
+     next(error)
+   }
 });
 
-//http://localhost:3000/query?hola=como&estas=yo&muy=bien
-router.get("/query", (req, res) =>{
-  res.json(req.query)
-});
+
 
 module.exports = router;
