@@ -4,11 +4,11 @@ services:
     image: mysql:5.7
     restart: always
     environment:
-      MYSQL_DATABASE: 'hapegild_yeya'
+      MYSQL_DATABASE: 'yeya'
       # So you don't have to use root, but you can if you like
-      MYSQL_USER: 'hapegild_yeya'
+      MYSQL_USER: 'yeya'
       # You can use whatever password you like
-      MYSQL_PASSWORD: 'Ar83y4r83y'
+      MYSQL_PASSWORD: 'yeya'
       # Password for root access
       MYSQL_ROOT_PASSWORD: '1546'
     ports:

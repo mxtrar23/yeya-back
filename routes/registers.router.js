@@ -28,27 +28,28 @@ router.post("/",
     }
 });
 
-router.get("/:reg_id",
+router.get("/:id",
   validatorHandler(FineOneRegistersSchema,'params'),
   async (req, res, next) =>{
-    let {reg_id} = req.params;
+    let {id} = req.params;
     try {
-      const registers = await service.findOne(reg_id)
+      const registers = await service.findOne(id)
       res.json(registers)
     } catch (error) {
       next(error)
     }
 });
 
-router.put("/:reg_id",
+router.put("/:id",
+  passport.authenticate('jwt',{session:false}),
   validatorHandler(FineOneRegistersSchema,'params'),
   validatorHandler(EditeRegistersSchema,'body'),
   async (req, res, next) =>{
-    let {reg_id} = req.params;
+    let {id} = req.params;
     let data = req.body;
 
     try {
-      const register = await service.update(reg_id,data)
+      const register = await service.update(id,data)
       res.json(register);
 
     } catch (error) {
@@ -56,14 +57,16 @@ router.put("/:reg_id",
     }
 });
 
-router.delete("/:reg_id", async (req, res,next) =>{
-  let {reg_id} = req.params;
-  try {
-    const register = await service.delete(reg_id)
-    res.json(register);
-  } catch (error) {
-    next(error)
-  }
+router.delete("/:id",
+  passport.authenticate('jwt',{session:false}),
+  async (req, res,next) =>{
+  let {id} = req.params;
+    try {
+      const register = await service.delete(id)
+      res.json(register);
+    } catch (error) {
+      next(error)
+    }
 });
 
 
