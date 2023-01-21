@@ -39,6 +39,12 @@ const UserSchema = {
     type: DataTypes.DATE,
     field: 'usr_create_at',
     defaultValue: Sequelize.NOW
+  },
+  state:{
+    allowNull:false,
+    type:DataTypes.BOOLEAN,
+    defaultValue:true,
+    field:'usr_state'
   }
 }
 

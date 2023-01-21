@@ -29,16 +29,14 @@ class RegistersService {
   // }
 
   async create (data) {
-    const register = {
-      date:new Date(),
-      ...data
-    }
+    const register = {...data}
     //this.registers.push(register);
+    console.table(register);
     const newRegister = await models.Register.create(register)
     return newRegister;
   }
 
-  async find () {
+  async find (usr_id) {
 
     //const [rows, fields] = await ConnectionDB.execute('SELECT * FROM `table` WHERE `name` = ? AND `age` > ?', ['Morty', 14]);
     // const query = 'SELECT * FROM registers';
@@ -46,7 +44,12 @@ class RegistersService {
 
     // const [data] = await sequelize.query(query);
 
-    const res = await models.Register.findAll()
+    const res = await models.Register.findAll({
+        where:{
+          usr_id
+        },
+        include: ['cat_categories']
+      })
     return res;
   }
 

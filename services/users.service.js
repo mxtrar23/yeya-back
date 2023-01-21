@@ -25,9 +25,9 @@ class UserService {
     return rta;
   }
 
-  async findbyUsername(username) {
+  async findbyEmail(email) {
     const user = await models.User.findOne({
-      where:{username}
+      where:{email}
     });
     if (!user) {
       throw boom.unauthorized('user not found');

@@ -7,9 +7,11 @@ const UserService = require('../../../services/users.service')
 
 const service = new UserService()
 
-const LocalStrategy = new Strategy(async (username,password,done)=>{
+const LocalStrategy = new Strategy({
+  usernameField:'email'
+},async (email,password,done)=>{
   try {
-    const user = await service.findbyUsername(username);
+    const user = await service.findbyEmail(email);
     if(!user) done(boom.unauthorized('No Autorized'),false)
 
     const isMatch = await bcrypt.compare(password,user.password)

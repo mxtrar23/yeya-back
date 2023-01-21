@@ -1,5 +1,6 @@
 const { DataTypes , Model} = require('sequelize');
-const { USER_TABLE } = require('./users.model')
+const { USER_TABLE } = require('./users.model');
+const { CATEGORY_TABLE } = require('./categories.model');
 
 const REGISTER_TABLE = 'reg_registers';
 
@@ -44,6 +45,20 @@ const RegisterSchema = {
     },
     // onUpdate: 'CASCADE',
     // onDelete: 'SET NULL'
+  },
+  type:{
+    field:'reg_type',
+    allowNull:false,
+    type:DataTypes.CHAR(1),
+  },
+  categoryId:{
+    field:'cat_id',
+    allowNull:false,
+    type:DataTypes.UUID,
+    references:{
+      model:CATEGORY_TABLE,
+      key:'cat_id'
+    }
   }
 }
 
@@ -52,6 +67,11 @@ class Register extends Model {
     this.belongsTo(models.User, {
       as: 'usr_users',
       foreignKey:'usr_id'
+    });
+
+    this.belongsTo(models.Category, {
+      as: 'cat_categories',
+      foreignKey:'cat_id'
     });
   }
 

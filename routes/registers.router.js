@@ -10,8 +10,10 @@ const router = express.Router();
 
 const service = new RegistersService();
 
-router.get("/", async (req, res) =>{
-  const registers = await service.find()
+router.get("/",
+  passport.authenticate('jwt',{session:false}),
+  async (req, res) =>{
+  const registers = await service.find(req.user.sub)
   res.json(registers)
 });
 
@@ -29,6 +31,7 @@ router.post("/",
 });
 
 router.get("/:id",
+  passport.authenticate('jwt',{session:false}),
   validatorHandler(FineOneRegistersSchema,'params'),
   async (req, res, next) =>{
     let {id} = req.params;
@@ -40,7 +43,7 @@ router.get("/:id",
     }
 });
 
-router.put("/:id",
+router.patch("/:id",
   passport.authenticate('jwt',{session:false}),
   validatorHandler(FineOneRegistersSchema,'params'),
   validatorHandler(EditeRegistersSchema,'body'),
