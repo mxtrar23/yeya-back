@@ -22,6 +22,7 @@ class UserService {
     //   include: ['customer']
     // });
 
+    delete rta.dataValues.password;
     return rta;
   }
 
@@ -40,6 +41,7 @@ class UserService {
     if (!user) {
       throw boom.notFound('user not found');
     }
+    delete user.dataValues.password;
     return user;
   }
 

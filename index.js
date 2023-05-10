@@ -1,5 +1,6 @@
 const express = require("express");
 const routerApi = require("./routes");
+const cors = require('cors');
 const {errorsHandler,logErrors,boomErrorsHandler,queryErrorHandler} = require('./middlewares/error.handler')
 const AuthHandler = require('./middlewares/auth.handler')
 
@@ -8,6 +9,19 @@ require('dotenv').config()
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json())
+
+const whitelist = ['http://localhost:3002','http://localhost:80','http://localhost:8080']
+const options = {
+  origin: (origin, callback) => {
+    if (whitelist.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('no permitido'), false);
+    }
+  }
+}
+
+app.use(cors(options));
 
 require('./utils/auth')
 
