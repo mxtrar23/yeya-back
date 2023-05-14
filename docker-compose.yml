@@ -26,7 +26,10 @@ services:
     build: .
     ports:
       - '3000:3000'
+    depends_on:
+      - db
     links:
       - db
+    restart: always
 volumes:
   my-db:

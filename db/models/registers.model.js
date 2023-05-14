@@ -35,6 +35,12 @@ const RegisterSchema = {
     defaultValue:DataTypes.NOW,
     field:'reg_create_at'
   },
+  date:{
+    allowNull:false,
+    type:DataTypes.DATEONLY,
+    defaultValue:DataTypes.NOW,
+    field:'reg_date'
+  },
   userId: {
     field: 'usr_id',
     allowNull: false,

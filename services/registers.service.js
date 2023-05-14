@@ -46,9 +46,11 @@ class RegistersService {
 
     const res = await models.Register.findAll({
         where:{
-          usr_id
+          usr_id,
+          state:true
         },
-        include: ['cat_categories']
+        include: ['cat_categories'],
+        order: [['reg_date', 'DESC'],['reg_create_at', 'DESC']],
       })
     return res;
   }
@@ -75,7 +77,7 @@ class RegistersService {
 
     if (!register) throw boom.notFound("No found")
 
-    const res = await register.update({reg_state:false})
+    const res = await register.update({state:false})
     return res
   }
 }
