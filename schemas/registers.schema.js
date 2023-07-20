@@ -21,6 +21,7 @@ const EditeRegistersSchema = Joi.object({
   descripcion : descripcion,
   value : value,
   date : date,
+  type : type,
   categoryId : categoryId
 })
 
