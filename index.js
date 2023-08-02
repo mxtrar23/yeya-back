@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json())
 
-const whitelist = ['http://localhost:3002','http://localhost:80','http://localhost:8080']
+const whitelist = ['http://localhost:3002','http://localhost:80','http://localhost:8080','https://haper.dev','https://yeya.haper.dev']
 const options = {
   origin: (origin, callback) => {
     if (whitelist.includes(origin)) {
