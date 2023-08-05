@@ -3,14 +3,13 @@ const routerApi = require("./routes");
 const cors = require('cors');
 const {errorsHandler,logErrors,boomErrorsHandler,queryErrorHandler} = require('./middlewares/error.handler')
 const AuthHandler = require('./middlewares/auth.handler')
-
 const app = express();
 require('dotenv').config()
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json())
 
-const whitelist = ['http://localhost:3002','http://localhost:80','http://localhost:8080','https://haper.dev','https://yeya.haper.dev']
+const whitelist = ['http://localhost:3002','http://localhost:80','http://localhost:8080','https://haper.dev','https://yeya.haper.dev','https://mxtrar23.github.io/yeya-front','https://mxtrar23.github.io']
 const options = {
   origin: (origin, callback) => {
     if (whitelist.includes(origin)) {
